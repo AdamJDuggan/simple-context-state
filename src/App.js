@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { GlobalContext } from "./GlobalContext";
 
 function App() {
+  const { characters, addCharacter } = useContext(GlobalContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Context API</h1>
+      <hr />
+      <h3>Characters</h3>
+      <button onClick={() => addCharacter("Karin")}>Add</button>
+      {characters.map((c) => (
+        <p>{c}</p>
+      ))}
+      <hr />
+      <h3>Todos</h3>
     </div>
   );
 }
