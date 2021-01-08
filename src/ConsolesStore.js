@@ -12,5 +12,6 @@ const ConsolesStore = {
       };
     },
   },
+  asyncActions: {},
 };
 export { ConsolesStore };

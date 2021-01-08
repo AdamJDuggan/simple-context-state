@@ -2,21 +2,18 @@ const TodosStore = {
   name: "todos",
   initialState: ["Buy milk", "Start running", "Take over the world"],
   actions: {
-    addTodo: (state) => {
-      return (payload) => {
-        const newState = { ...state, todos: [...state.todos, payload] };
-        return newState;
-      };
+    addTodo: (state) => (payload) => {
+      return { ...state, todos: [...state.todos, payload] };
     },
-    addCharacter2: (state) => {
-      return (payload) => {
-        const newState = {
-          ...state,
-          characters: [...state.characters, payload],
-        };
-        return newState;
-      };
+  },
+  asyncActions: {
+    addTodoAsync: (state) => () => async () => {
+      const responce = await fetch(
+        "https://jsonplaceholder.typicode.com/todos/1"
+      ).then((res) => res.json());
+      return { ...state, todos: [...state.todos, responce.title] };
     },
   },
 };
+
 export { TodosStore };

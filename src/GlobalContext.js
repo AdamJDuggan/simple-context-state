@@ -2,38 +2,78 @@ import React, { createContext, useReducer } from "react";
 import { ContextDevTool } from "react-context-devtool";
 
 // Initial state
-let stores = {
+const stores = {
   errors: [],
   pending: [],
 };
 
-// Provider component
+/** PROVIDER CONTEXT */
 export const GlobalProvider = ({ root }) => {
+  //Reducer
   const AppReducer = (state, action) => {
     if (action.type) return action.payload;
     else return state;
   };
 
+  //Configure the reducer
   const [state, dispatch] = useReducer(AppReducer, stores);
+
+  //Add all user stores to the global array of stores
   root.stores.map((store) => (stores[store.name] = store.initialState));
 
+  //Creat an object to which we will add all user actions
   const actions = {};
+
+  //Map through the users stores
   root.stores.map((store) => {
+    // Find the array of actions in that store
     for (const [key, value] of Object.entries(store.actions)) {
+      //Pass it the global state
       const action = value(state);
+      //Create string of the action name (to be shown as "type" in the reducer)
       const type = key.toString();
+      //Add this action to the array actions, its callback sends the newState (payload) to the reducer
       actions[key] = (payload) => dispatch({ type, payload: action(payload) });
     }
+
+    //Find the array of async actions in that store
+    for (const [key, value] of Object.entries(store.asyncActions)) {
+      //Pass it the global state
+      const action = value(state);
+      //Create string of the action name (to be shown as "type" in the reducer)
+      const type = key.toString();
+      //Add this action to the array actions, its callback sends the newState (payload) to the reducer
+      actions[key] = async () => {
+        const response = await action();
+        const payload = await response();
+        dispatch({ type, payload });
+      };
+    }
   });
+
+  //Create an array which will be an object of each store and its state
   const globalStore = {};
+
   for (const [key, value] of Object.entries(stores)) {
     globalStore[key] = state[key];
   }
+
+  //Async action
+  const asyncAction = async (action, fetch) => {
+    const response = await fetch();
+    action(response);
+  };
+
+  //Errors
+
+  //Pending
+
   return (
     <GlobalContext.Provider
       value={{
         ...actions,
         ...globalStore,
+        asyncAction,
       }}
     >
       {root.component}
