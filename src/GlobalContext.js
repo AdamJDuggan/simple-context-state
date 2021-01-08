@@ -1,40 +1,42 @@
 import React, { createContext, useReducer } from "react";
 import { ContextDevTool } from "react-context-devtool";
 
-const AppReducer = (state, action) => {
-  if (action.type === "character/add") return action.payload;
-};
-
 // Initial state
-const initialState = {
-  characters: ["Ryu", "Blanka", "ChunLi"],
+let stores = {
+  errors: [],
+  pending: [],
 };
-
-// Create context
-export const GlobalContext = createContext(initialState);
 
 // Provider component
-export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+export const GlobalProvider = ({ root }) => {
+  const AppReducer = (state, action) => {
+    if (action.type) return action.payload;
+    else return state;
+  };
 
-  // Actions
+  const [state, dispatch] = useReducer(AppReducer, stores);
+  root.stores.map((store) => (stores[store.name] = store.initialState));
 
-  function addCharacter(character) {
-    const newState = { ...state, characters: [...state.characters, character] };
-    dispatch({
-      type: "character/add",
-      payload: newState,
-    });
+  const actions = {};
+  root.stores.map((store) => {
+    for (const [key, value] of Object.entries(store.actions)) {
+      const action = value(state);
+      const type = key.toString();
+      actions[key] = (payload) => dispatch({ type, payload: action(payload) });
+    }
+  });
+  const globalStore = {};
+  for (const [key, value] of Object.entries(stores)) {
+    globalStore[key] = state[key];
   }
-
   return (
     <GlobalContext.Provider
       value={{
-        characters: state.characters,
-        addCharacter,
+        ...actions,
+        ...globalStore,
       }}
     >
-      {children}
+      {root.component}
       <ContextDevTool
         context={GlobalContext}
         id="uniqContextId"
@@ -43,3 +45,6 @@ export const GlobalProvider = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
+
+// Create context
+export const GlobalContext = createContext(stores);

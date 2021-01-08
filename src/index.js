@@ -2,15 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { GlobalProvider } from "./GlobalContext";
-import { debugContextDevtool } from "react-context-devtool";
-
-const container = document.getElementById("root");
+import { TodosStore } from "./TodosStore";
 
 ReactDOM.render(
-  <GlobalProvider>
-    <App />
-  </GlobalProvider>,
-  container
+  <GlobalProvider root={{ component: <App />, stores: [TodosStore] }} />,
+  document.getElementById("root")
 );
-
-debugContextDevtool(container, {});
