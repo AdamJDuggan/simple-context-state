@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalContext";
+import useErrors from "./useErrors";
 
 function App() {
   const { todos, addTodo, addTodoAsync, consoles, addConsole } = useContext(
     GlobalContext
   );
+
+  useErrors();
 
   return (
     <div>
@@ -13,6 +16,7 @@ function App() {
       <h3>Todos</h3>
       <button onClick={() => addTodo("Do decorating")}>Add</button>
       <button onClick={() => addTodoAsync()}>Add async</button>
+
       {todos && todos.map((t) => <p>{t}</p>)}
       <hr />
       <h3>Consoles</h3>
