@@ -9,5 +9,6 @@ ReactDOM.render(
   <GlobalProvider
     root={{ component: <App />, stores: [TodosStore, ConsolesStore] }}
   />,
+  
   document.getElementById("root")
 );

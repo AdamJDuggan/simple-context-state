@@ -3,7 +3,12 @@ import { ContextDevTool } from "react-context-devtool";
 
 // Initial state
 const stores = {
-  errors: [],
+  errors: [
+    // "auth_login",
+    // "auth_getProfile",
+    // "consoles_remove",
+    // "products_delete",
+  ],
   pending: [],
 };
 
@@ -34,7 +39,6 @@ export const GlobalProvider = ({ root }) => {
 
   const removePending = (action) => {
     const newPending = state.pending.filter((item) => item !== action);
-    console.log(newPending);
     const newState = {
       ...state,
       pending: newPending,
@@ -64,9 +68,9 @@ export const GlobalProvider = ({ root }) => {
         //Pass it the global state
         const action = value(state[store.name]);
         //Create string of the action name (to be shown as "type" in the reducer)
-        const type = key.toString();
+        const type = `${store.name}_${key}`;
         //Add this action to the array actions, its callback sends the newState (payload) to the reducer
-        actions[key] = (payload) =>
+        actions[type] = (payload) =>
           dispatch({
             type,
             payload: { ...state, [store.name]: action(payload) },
@@ -77,8 +81,8 @@ export const GlobalProvider = ({ root }) => {
       //Find the array of async actions in that store
       for (const [key, value] of Object.entries(store.asyncActions)) {
         //Create string of the action name (to be shown as "type" in the reducer)
-        const type = key.toString();
-        actions[key] = async () => {
+        const type = `${store.name}_${key}_async`;
+        actions[type] = async () => {
           const action = value(state[store.name]);
           addPending(type);
           try {

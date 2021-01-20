@@ -10,3 +10,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.nav {
+  display: flex;
+  height: 58px;
+  background: grey;
+  position: sticky;
+  top: 0;
+}
+
+.container {
+  height: calc(100vh - 58px);
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sideNav {
+  flex-shrink: 1;
+  border: 1px solid red;
+}
+.sideNavOpen {
+  width: 350px;
+}
+.sideNavClosed {
+  width: 50px;
+}
+
+.main {
+  flex-grow: 1;
+  border: 1px solid blue;
+}
