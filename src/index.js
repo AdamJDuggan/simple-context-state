@@ -1,14 +1,17 @@
+// React
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { GlobalProvider } from "./GlobalContext";
-import { TodosStore } from "./TodosStore";
-import { ConsolesStore } from "./ConsolesStore";
+
+// SimpleContext API
+import { Provider } from "./simple-context/GlobalContext";
+
+// Stores created by the user ...
+import { TodosStore } from "./stores/TodosStore";
+import { ConsolesStore } from "./stores/ConsolesStore";
 
 ReactDOM.render(
-  <GlobalProvider
-    root={{ component: <App />, stores: [TodosStore, ConsolesStore] }}
-  />,
-  
+  <Provider component={<App />} stores={[TodosStore, ConsolesStore]} />,
+
   document.getElementById("root")
 );

@@ -1,38 +1,30 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "./GlobalContext";
-import useErrors from "./useErrors";
-import "./index.css";
-import { classnames } from "classnames";
+import React from "react";
+import useErrors from "./simple-context/useErrors";
+import usePending from "./simple-context/usePending";
+import useConextState from "./simple-context/useContextState";
+
+import Consoles from "./components/Consoles";
+import Todos from "./components/Todos";
 
 function App() {
-  //Console Store
-  const { consoles, consoles_add } = useContext(GlobalContext);
-
   //Todo store
-  const { todos, todos_add_async, todos_addFail_async } = useContext(
-    GlobalContext
-  );
 
-  //const { errors } = useErrors("auth", "consoles_remove");
-  const errors = useErrors("auth", "consoles_remove");
-  console.log(errors);
+  const errors = useErrors();
+
+  const pending = usePending();
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>Context API</h1>
       <hr />
       <h3>Pending:</h3>
+      {pending && pending.map((action) => <p>{action}</p>)}
+      <hr />
       <h3>Errors:</h3>
+      {errors && errors.map((error) => <p>{error}</p>)}
       <hr />
-      <h3>Consoles</h3>
-      <button onClick={() => consoles_add("Dreamcast")}>Add</button>
-      {consoles && consoles.map((c) => <p>{c}</p>)}
-      <hr />
-      <h3>Todos</h3>
-      <button onClick={() => todos_add_async()}>Add async</button>
-      <button onClick={() => todos_addFail_async()}>Add async fail</button>
-
-      {todos && todos.map((t) => <p>{t}</p>)}
+      <Consoles />
+      <Todos />
     </div>
   );
 }

@@ -13,7 +13,7 @@ const stores = {
 };
 
 /** PROVIDER CONTEXT */
-export const GlobalProvider = ({ root }) => {
+export const Provider = ({ ...root }) => {
   //Reducer
   const AppReducer = (state, action) => {
     if (action.type) return action.payload;
@@ -106,24 +106,11 @@ export const GlobalProvider = ({ root }) => {
     globalStore[key] = state[key];
   }
 
-  //Async action
-  const asyncAction = async (action, fetch) => {
-    const response = await fetch();
-    action(response);
-  };
-
-  //Errors
-
-  //Pending
-  const errors = stores.errors;
-  const pending = stores.pending;
-
   return (
     <GlobalContext.Provider
       value={{
         ...actions,
         ...globalStore,
-        asyncAction,
       }}
     >
       {root.component}
