@@ -1,5 +1,5 @@
 import React from "react";
-import useSimpleState from "../simple-state/useSimpleState";
+import useSimpleState from "../simple-state/use-simple-state";
 
 function Consoles() {
   //Console Store

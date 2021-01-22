@@ -8,9 +8,9 @@ const TodosStore = {
     },
   },
   asyncActions: {
-    addAsync: (state) => () => async () => {
+    addAsync: (state) => (payload) => async () => {
       const responce = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/1`
+        `https://${payload}.typicode.com/todos/1`
       ).then((res) => res.json());
       const newState = [...state, responce.title];
       return newState;

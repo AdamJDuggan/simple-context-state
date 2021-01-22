@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "./GlobalContext";
+import { GlobalContext } from "./use-simple-provider";
 
 function useSimpleState(...actions) {
   const state = useContext(GlobalContext);

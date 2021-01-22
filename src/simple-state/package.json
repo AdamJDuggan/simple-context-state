@@ -1,0 +1,30 @@
+{
+  "name": "simple-state",
+  "version": "1.0.0",
+  "description": "Quick, simple state setup and state management for react apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamJDuggan/simple-state.git"
+  },
+  "keywords": [
+    "simple",
+    "state",
+    "management",
+    "setup",
+    "context",
+    "no-redux",
+    "middleware",
+    "global-errors",
+    "global-pending"
+  ],
+  "author": "Adam Duggan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdamJDuggan/simple-state/issues"
+  },
+  "homepage": "https://github.com/AdamJDuggan/simple-state#readme"
+}

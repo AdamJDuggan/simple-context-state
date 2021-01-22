@@ -1,6 +1,6 @@
 import React from "react";
-import useSimpleErrors from "./simple-state/useSimpleErrors";
-import useSimplePending from "./simple-state/useSimplePending";
+import useSimpleErrors from "./simple-state/use-simple-errors";
+import useSimplePending from "./simple-state/use-simple-pending";
 
 import Consoles from "./components/Consoles";
 import Todos from "./components/Todos";

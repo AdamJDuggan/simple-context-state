@@ -3,8 +3,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
-// SimpleState API
-import { SimpleProvider } from "./simple-state/GlobalContext";
+// Styles
+import "./index.css";
+
+// SimpleState Provider
+import { SimpleProvider } from "./simple-state/use-simple-provider";
 
 // Stores created by the user ...
 import { TodosStore } from "./stores/TodosStore";
