@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalContext";
 
-const useErrors = (...actions) => {
+const useSimpleErrors = (...actions) => {
   const { errors } = useContext(GlobalContext);
   const matchedErrors = [];
   if (!actions.length) {
@@ -9,9 +9,10 @@ const useErrors = (...actions) => {
   } else {
     actions.map((action) => {
       if (!action.split("_")[1]) {
+        console.log(action.split("_")[0]);
         errors.find((error) => {
           if (
-            error.split("_")[0] === action.split("_")[0] &&
+            error.type.split("_")[0] === action.split("_")[0] &&
             !matchedErrors.includes(error)
           ) {
             matchedErrors.push(error);
@@ -19,7 +20,7 @@ const useErrors = (...actions) => {
         });
       } else {
         errors.map((error) => {
-          if (error === action && !matchedErrors.includes(error))
+          if (error.type === action && !matchedErrors.includes(error))
             matchedErrors.push(error);
         });
       }
@@ -32,4 +33,4 @@ const useErrors = (...actions) => {
   }
 };
 
-export default useErrors;
+export default useSimpleErrors;

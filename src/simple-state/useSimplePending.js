@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalContext";
 
-const usePending = (...actions) => {
+const useSimplePending = (...actions) => {
   const { pending } = useContext(GlobalContext);
   const matchedPending = [];
   if (!actions.length) {
@@ -32,4 +32,4 @@ const usePending = (...actions) => {
   }
 };
 
-export default usePending;
+export default useSimplePending;

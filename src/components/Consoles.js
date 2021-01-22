@@ -1,9 +1,9 @@
 import React from "react";
-import useContextState from "../simple-context/useContextState";
+import useSimpleState from "../simple-state/useSimpleState";
 
 function Consoles() {
   //Console Store
-  const { consoles, consoles_add } = useContextState();
+  const { consoles, consoles_add } = useSimpleState();
 
   return (
     <div>

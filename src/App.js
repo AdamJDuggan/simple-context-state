@@ -1,17 +1,14 @@
 import React from "react";
-import useErrors from "./simple-context/useErrors";
-import usePending from "./simple-context/usePending";
-import useConextState from "./simple-context/useContextState";
+import useSimpleErrors from "./simple-state/useSimpleErrors";
+import useSimplePending from "./simple-state/useSimplePending";
 
 import Consoles from "./components/Consoles";
 import Todos from "./components/Todos";
 
 function App() {
-  //Todo store
+  const errors = useSimpleErrors();
 
-  const errors = useErrors();
-
-  const pending = usePending();
+  const pending = useSimplePending();
 
   return (
     <div style={{ padding: "20px" }}>
@@ -21,7 +18,12 @@ function App() {
       {pending && pending.map((action) => <p>{action}</p>)}
       <hr />
       <h3>Errors:</h3>
-      {errors && errors.map((error) => <p>{error}</p>)}
+      {errors &&
+        errors.map((error) => (
+          <p>
+            {error.type} : {error.message}
+          </p>
+        ))}
       <hr />
       <Consoles />
       <Todos />

@@ -1,15 +1,14 @@
 import React from "react";
-import useContextState from "../simple-context/useContextState";
+import useSimpleState from "../simple-state/useSimpleState";
 
 function Consoles() {
   //Todos Store
-  const { todos, todos_add_async, todos_addFail_async } = useContextState();
+  const { todos, todos_addAsync } = useSimpleState();
 
   return (
     <div>
       <h3>Todos</h3>
-      <button onClick={() => todos_add_async()}>Add async</button>
-      <button onClick={() => todos_addFail_async()}>Add async fail</button>
+      <button onClick={() => todos_addAsync("HI")}>Add async</button>
       {todos && todos.map((t) => <p>{t}</p>)}
       <hr />
     </div>

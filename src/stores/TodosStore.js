@@ -8,16 +8,9 @@ const TodosStore = {
     },
   },
   asyncActions: {
-    add: (state) => () => async () => {
+    addAsync: (state) => () => async () => {
       const responce = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/1"
-      ).then((res) => res.json());
-      const newState = [...state, responce.title];
-      return newState;
-    },
-    addFail: (state) => () => async () => {
-      const responce = await fetch(
-        "https://jsodnplaceholder.typicode.com/todos/1"
+        `https://jsonplaceholder.typicode.com/todos/1`
       ).then((res) => res.json());
       const newState = [...state, responce.title];
       return newState;

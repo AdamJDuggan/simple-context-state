@@ -3,17 +3,12 @@ import { ContextDevTool } from "react-context-devtool";
 
 // Initial state
 const stores = {
-  errors: [
-    // "auth_login",
-    // "auth_getProfile",
-    // "consoles_remove",
-    // "products_delete",
-  ],
+  errors: [{ type: "auth_login", message: "Trouble logging in" }],
   pending: [],
 };
 
 /** PROVIDER CONTEXT */
-export const Provider = ({ ...root }) => {
+export const SimpleProvider = ({ ...root }) => {
   //Reducer
   const AppReducer = (state, action) => {
     if (action.type) return action.payload;
@@ -26,35 +21,62 @@ export const Provider = ({ ...root }) => {
   //Add all user stores to the global array of stores
   root.stores.map((store) => (stores[store.name] = store.initialState));
 
-  const addPending = (action) => {
+  const addPending = (type) => {
     const newState = {
       ...state,
-      pending: [...state.pending, action],
+      pending: [...state.pending, type],
     };
     dispatch({
-      type: action,
+      type: `${type}/pending`,
       payload: newState,
     });
   };
 
-  const removePending = (action) => {
-    const newPending = state.pending.filter((item) => item !== action);
+  const removePending = (type) => {
+    const newPending = state.pending.filter((item) => item !== type);
     const newState = {
       ...state,
       pending: newPending,
     };
-    dispatch({ type: `pending/addTodo`, payload: newState });
+    dispatch({ type: `${type}/removePending`, payload: newState });
   };
 
-  const addError = (action) => {
-    const newState = {
-      ...state,
-      errors: [...state.errors, action],
-    };
-    dispatch({
-      type: `pending/addTodo`,
-      payload: newState,
-    });
+  const addError = (type, message) => {
+    const exists = state.errors.find((error) => error.type === type);
+    if (exists) {
+      const existingErrors = state.errors.filter(
+        (error) => error.type !== type
+      );
+      const newState = {
+        ...state,
+        errors: [...existingErrors, { type: type, message: message }],
+      };
+      dispatch({
+        type: `${type}/error`,
+        payload: newState,
+      });
+    } else {
+      const newState = {
+        ...state,
+        errors: [...state.errors, { type: type, message: message }],
+      };
+      dispatch({
+        type: `${type}/error`,
+        payload: newState,
+      });
+    }
+  };
+
+  const removeError = (type) => {
+    const exists = state.errors.find((error) => error.type === type);
+    if (exists) {
+      const newErrors = state.pending.filter((item) => item !== type);
+      const newState = {
+        ...state,
+        pending: newErrors,
+      };
+      dispatch({ type: `${type}/removeError`, payload: newState });
+    }
   };
 
   //Creat an object to which we will add all user actions
@@ -81,18 +103,19 @@ export const Provider = ({ ...root }) => {
       //Find the array of async actions in that store
       for (const [key, value] of Object.entries(store.asyncActions)) {
         //Create string of the action name (to be shown as "type" in the reducer)
-        const type = `${store.name}_${key}_async`;
-        actions[type] = async () => {
+        const type = `${store.name}_${key}`;
+        actions[type] = async (payload) => {
           const action = value(state[store.name]);
           addPending(type);
           try {
             const response = await action();
             const payload = await response();
             removePending(type);
+            removeError(type);
             dispatch({ type, payload: { ...state, [store.name]: payload } });
           } catch (err) {
             removePending(type);
-            if (!state.errors.includes(type)) addError(type, err);
+            if (!state.errors.includes(type)) addError(type, err.toString());
           }
         };
       }

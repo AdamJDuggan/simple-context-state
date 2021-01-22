@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalContext";
 
-function useContextState(...actions) {
+function useSimpleState(...actions) {
   const state = useContext(GlobalContext);
   return state;
 }
 
-export default useContextState;
+export default useSimpleState;
