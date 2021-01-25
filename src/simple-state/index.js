@@ -3,9 +3,7 @@ import useSimpleState from "../simple-state/use-simple-state";
 import useSimpleErrors from "./use-simple-errors";
 import useSimplePending from "./use-simple-pending";
 
-export default {
-  SimpleProvider,
-  useSimpleState,
-  useSimpleErrors,
-  useSimplePending,
-};
+export { SimpleProvider };
+export { useSimpleState };
+export { useSimpleErrors };
+export { useSimplePending };
