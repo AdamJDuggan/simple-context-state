@@ -1,19 +1,15 @@
 import React from "react";
-import useSimpleState from "../simple-state/use-simple-state";
+import { useSimpleState } from "../simple-state";
 
 function Consoles() {
   //Todos Store
-  const { todos, todos_addAsync } = useSimpleState();
+  const { todos, todos_addAsync, todos_addAsyncError } = useSimpleState();
 
   return (
     <div>
       <h3>Todos</h3>
-      <button onClick={() => todos_addAsync("jsonplaceholder")}>
-        Add async
-      </button>
-      <button onClick={() => todos_addAsync("jsonplaceholfder")}>
-        Add async fail
-      </button>
+      <button onClick={() => todos_addAsync()}>Add async</button>
+      <button onClick={() => todos_addAsyncError()}>Add async fail</button>
       {todos && todos.map((t) => <p>{t}</p>)}
       <hr />
     </div>

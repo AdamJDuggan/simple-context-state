@@ -7,7 +7,8 @@ import App from "./App";
 import "./index.css";
 
 // SimpleState Provider
-import { SimpleProvider } from "./simple-state/use-simple-provider";
+// import { SimpleProvider } from "simple-context-state";
+import { SimpleProvider } from "./simple-state";
 
 // Stores created by the user ...
 import { TodosStore } from "./stores/TodosStore";

@@ -1,9 +1,13 @@
 import React from "react";
-import useSimpleErrors from "./simple-state/use-simple-errors";
-import useSimplePending from "./simple-state/use-simple-pending";
+// import { useSimpleErrors } from "simple-context-state";
+// import { useSimplePending } from "simple-context-state";
+import { useSimpleErrors } from "./simple-state";
+import { useSimplePending } from "./simple-state";
 
 import Consoles from "./components/Consoles";
 import Todos from "./components/Todos";
+import Pending from "./components/Pending";
+import Errors from "./components/Errors";
 
 function App() {
   const errors = useSimpleErrors();
@@ -11,23 +15,16 @@ function App() {
   const pending = useSimplePending();
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Context API</h1>
-      <hr />
-      <h3>Pending:</h3>
-      {pending && pending.map((action) => <p>{action}</p>)}
-      <hr />
-      <h3>Errors:</h3>
-      {errors &&
-        errors.map((error) => (
-          <p>
-            {error.type} : {error.message}
-          </p>
-        ))}
-      <hr />
-      <Consoles />
-      <Todos />
-    </div>
+    <>
+      <div className="container">
+        {pending && <Pending />}
+        {errors && <Errors />}
+        <div className="header">Simple-Context-State</div>
+
+        {/* <Consoles />
+        <Todos /> */}
+      </div>
+    </>
   );
 }
 
