@@ -1,6 +1,6 @@
 {
   "name": "simple-context-state",
-  "version": "1.7.4",
+  "version": "1.9.8",
   "description": "",
   "main": "./build/index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "author": "adam-duggan",
   "keywords": [
-    "state management",
+    "react",
     "context",
-    "utils",
-    "boilerplate",
     "state",
+    "management",
+    "utility",
     "no redux",
     "async",
-    "action wrapper"
+    "actions"
   ],
   "license": "ISC",
   "devDependencies": {
@@ -29,7 +29,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@material/react-button": "^0.15.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-context-devtool": "^2.0.3",
