@@ -1,5 +1,5 @@
 import React from "react";
-import { useSimpleState } from "../simple-state";
+import { useSimpleState } from "simple-context-state";
 
 function Errors() {
   const { errors_clear } = useSimpleState();
