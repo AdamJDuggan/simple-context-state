@@ -1,8 +1,73 @@
 <h1>Global state utility for react</h1>
-<p>Simple-context-state wraps React Context to provide quick setup for application state.</p>
-<p>All async actions you create get wrapped with a pending and errors state.</p>
+<h3>Description</h3>
+<p>Wraps React Context to provide quick setup and management of application state. All async actions get wrapped with a pending and errors state. A simple API which exposes 4 easy-to-use utilities. No need to learn redux, create reducers or waste time.</p>
+<br/>
+<h3>Install</h3>
+<pre><code>npm i simple-context-state</code></pre>
+<br/>
+<h3>Example</h3>
+<p>https://adamjduggan.github.io/simple-context-state-package</p>
+<br/>
+<h3>Guide</h3>
+<br/>
+<h4>1. Quickly create your own stores as basic objects</h4>
+<p>Stores take a name (string), initialState (any data type), actions which update the stores state (object of functions) and asyncActions (object of functions).</p>
+<pre><code>
+const TodosStore = {
+&nbsp;&nbsp;name: "todos",
+&nbsp;&nbsp;initialState: ["Buy milk", "Start running", "Phone a friend"],
+&nbsp;&nbsp;actions: {
+&nbsp;&nbsp;&nbsp;&nbsp;add: (state) =&gt; (payload) =&gt; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, payload];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;},
+&nbsp;&nbsp;asyncActions: {
+&nbsp;&nbsp;&nbsp;&nbsp;fetch: (state) =&gt; (payload) =&gt; async () =&gt; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const responce = await fetch(`https://...`);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, responce];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;},
+};
+</code></pre>
+<br/>
+<h4>2. Wrap your root component (src/index.js) with SimpleProvider and pass it your stores as an array.</h4>
+<pre><code>
+import { SimpleProvider } from "simple-context-state";
+<br/>
+ReactDOM.render(
+&nbsp;&nbsp;&lt;SimpleProvider component={&lt;App /&gt;} stores={[TodosStore, AnotherStore]} /&gt;,
+&nbsp;&nbsp;document.getElementById("root")
+);
+</code></pre>
+<br/>
+<h4>3. Import actions and state into your components with useSimpleState()</h4>
+<p>Here todos is state.todos and todos_fetch() is the fetch action created in the TodosStore.</p> 
+<p>Stores may have actions with the same name and we access actions with storeName_actionName.</p>
+<p>The action errors_reset() is avalible globally and clears the errors store.</p>
+<pre><code>
+import { useSimpleState } from "simple-context-state";
+<br/>
+const { todos, todos_add, todos_fetch } = useSimpleState();
+<br/>
+return (
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{todos &amp;&amp; todos.map((t) =&gt; &lt;p&gt;{t}&lt;/p&gt;)}  
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; todos_add("Buy a bike")}&gt;Add async&lt;/button&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; todos_fetch()}&gt;Get todo from API&lt;/button&gt;  
+);
+</code></pre>
+<br/>
+<h4>4. Access the errors store and pending store with two simple hooks</h4>
+<p>All actions are wrapped in a pending state and errors state so at anytime you can see which actions are loading, which have resolved and which have failed. useSimplePending() returns an array of action names. useSimpleErrors() returns an array of objects which each have a type and message.</p>
+<pre><code>
+// Get all errors from the errors store
+const errors = useSimpleErrors();
 
-<p>A easy-to-use API which exposes four utilities:</p>
+// Get all actions from the products store and auth store which are pending
+const pending = useSimplePending("auth", "products");
 
-<h2>1. UseSimpleProvider</h2>
-<p>Import this wrapper into your route file and </p>
+// Checks the errors store for these two actions
+const errors = useSimpleErrors("auth_login", "products_get");
+</code></pre>
