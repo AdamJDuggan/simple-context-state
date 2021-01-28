@@ -11,7 +11,7 @@
 <h3>Guide</h3>
 <br/>
 <h4>1. Quickly create your own stores as basic objects</h4>
-<p>Stores take a name (string), initialState (any data type), actions which update the stores state (object of functions) and asyncActions (object of functions).</p>
+<p>Stores are simple objects with a name (string), initialState (any data type) and actions (object of functions). Note the different syntax of synchronous actions (add) and asynchronous actions (fetch).</p>
 <pre><code>
 const TodosStore = {
 &nbsp;&nbsp;name: "todos",
@@ -21,8 +21,6 @@ const TodosStore = {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, payload];
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
 &nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;},
-&nbsp;&nbsp;asyncActions: {
 &nbsp;&nbsp;&nbsp;&nbsp;fetch: (state) =&gt; (payload) =&gt; async () =&gt; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const responce = await fetch(`https://...`);
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, responce];
@@ -43,7 +41,7 @@ ReactDOM.render(
 </code></pre>
 <br/>
 <h4>3. Import actions and state into your components with useSimpleState()</h4>
-<p>Here todos is state.todos and todos_fetch() is the fetch action created in the TodosStore.</p> 
+<p>Here todos is the array state.todos. todos_add() and todos_fetch() are the "add" and "fetch" actions created in the TodosStore.</p> 
 <p>Stores may have actions with the same name and we access actions with storeName_actionName.</p>
 <p>The action errors_reset() is avalible globally and clears the errors store.</p>
 <pre><code>

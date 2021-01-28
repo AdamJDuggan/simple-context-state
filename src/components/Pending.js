@@ -1,5 +1,6 @@
 import React from "react";
-import { useSimpleState } from "simple-context-state";
+//import { useSimpleState } from "simple-context-state";
+import { useSimpleState } from "../simple-state";
 
 function Pending() {
   //Todos Store

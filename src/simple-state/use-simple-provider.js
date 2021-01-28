@@ -77,29 +77,24 @@ export const SimpleProvider = ({ ...root }) => {
   root.stores.map((store) => {
     if (store.actions) {
       for (const [key, value] of Object.entries(store.actions)) {
+        const type = `${store.name}_${key}`;
         const action = value(state[store.name]);
-        const type = `${store.name}_${key}`;
-        actions[type] = (payload) =>
-          dispatch({
-            type,
-            payload: { ...state, [store.name]: action(payload) },
-          });
-      }
-    }
-    if (store.asyncActions) {
-      for (const [key, value] of Object.entries(store.asyncActions)) {
-        const type = `${store.name}_${key}`;
-        actions[type] = async (data) => {
-          const action = value(state[store.name]);
-          addPending(type);
-          try {
-            const response = await action(data);
-            const payload = await response();
-            dispatchAction(type, store, payload);
-          } catch (err) {
-            addError(type, err);
-          }
-        };
+        const invoke = action();
+        if (invoke.constructor.name === "AsyncFunction") {
+          actions[type] = async (data) => {
+            addPending(type);
+            try {
+              const response = await action(data);
+              const payload = await response();
+              dispatchAction(type, store, payload);
+            } catch (err) {
+              addError(type, err);
+            }
+          };
+        } else {
+          actions[type] = (payload) =>
+            dispatchAction(type, store, action(payload));
+        }
       }
     }
   });

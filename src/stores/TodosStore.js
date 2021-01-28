@@ -8,16 +8,14 @@ const TodosStore = {
       const newState = [...state, payload];
       return newState;
     },
-  },
-  asyncActions: {
-    addAsync: (state) => (payload) => async () => {
+    fetch: (state) => (payload) => async () => {
       const responce = await axios
         .get(`https://jsonplaceholder.typicode.com/todos/1`)
         .then((res) => res.data.title);
       const newState = [...state, responce];
       return newState;
     },
-    addAsyncError: (state) => (payload) => async () => {
+    fetch_fail: (state) => (payload) => async () => {
       const responce = await axios
         .get(`https://djsonplaceholder.typicode.com/todos/1`, { timeout: 2000 })
         .then((res) => res.data.title);

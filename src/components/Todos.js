@@ -1,20 +1,21 @@
 import React from "react";
-import { useSimpleState } from "simple-context-state";
-//import { useSimpleState } from "../simple-state";
+//import { useSimpleState } from "simple-context-state";
+import { useSimpleState } from "../simple-state";
 
-function Consoles() {
+function Todos() {
   //Todos Store
-  const { todos, todos_addAsync, todos_addAsyncError } = useSimpleState();
+  const { todos, todos_add, todos_fetch, todos_fetch_fail } = useSimpleState();
 
   return (
     <div>
       <h3>Todos</h3>
-      <button onClick={() => todos_addAsync()}>Add async</button>
-      <button onClick={() => todos_addAsyncError()}>Add async fail</button>
+      <button onClick={() => todos_add("Visit Gran")}>Add </button>
+      <button onClick={() => todos_fetch()}>Add async</button>
+      <button onClick={() => todos_fetch_fail()}>Add async fail</button>
       {todos && todos.map((t) => <p>{t}</p>)}
       <hr />
     </div>
   );
 }
 
-export default Consoles;
+export default Todos;
