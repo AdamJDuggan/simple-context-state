@@ -62,10 +62,10 @@ return (
 <pre><code>
 // Get all errors from the errors store
 const errors = useSimpleErrors();
-
+<br/>
 // Get all actions from the products store and auth store which are pending
 const pending = useSimplePending("auth", "products");
-
+<br/>
 // Checks the errors store for these two actions
 const errors = useSimpleErrors("auth_login", "products_get");
 </code></pre>
