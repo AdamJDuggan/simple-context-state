@@ -52,7 +52,9 @@ const { todos, todos_add, todos_fetch } = useSimpleState();
 return (
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{todos &amp;&amp; todos.map((t) =&gt; &lt;p&gt;{t}&lt;/p&gt;)}  
+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; todos_add("Buy a bike")}&gt;Add async&lt;/button&gt;
+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; todos_fetch()}&gt;Get todo from API&lt;/button&gt;  
 );
 </code></pre>
@@ -60,12 +62,12 @@ return (
 <h4>4. Access the errors store and pending store with two simple hooks</h4>
 <p>All actions are wrapped in a pending state and errors state so at anytime you can see which actions are loading, which have resolved and which have failed. useSimplePending() returns an array of action names. useSimpleErrors() returns an array of objects which each have a type and message.</p>
 <pre><code>
-// Get all errors from the errors store
+// Will get all errors from the errors store
 const errors = useSimpleErrors();
 <br/>
 // Get all actions from the products store and auth store which are pending
 const pending = useSimplePending("auth", "products");
 <br/>
-// Checks the errors store for these two actions
+// Checks the errors store for these two actions from the auth store
 const errors = useSimpleErrors("auth_login", "products_get");
 </code></pre>
