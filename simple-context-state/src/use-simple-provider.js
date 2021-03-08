@@ -75,28 +75,49 @@ export const SimpleProvider = ({ ...root }) => {
   const actions = { errors_clear };
 
   root.stores.map((store) => {
+    // if (store.actions) {
+    //   for (const [key, value] of Object.entries(store.actions)) {
+    //     const type = `${store.name}_${key}`;
+    //     const action = value(state[store.name]);
+
+    //     const split = key.split("_");
+    //     if (split[0] === "async") {
+    //       actions[type] = async (data) => {
+    //         addPending(type);
+    //         try {
+    //           const response = await action(data);
+    //           const payload = await response();
+    //           dispatchAction(type, store, payload);
+    //         } catch (err) {
+    //           addError(type, err);
+    //         }
+    //       };
+    //     } else {
+    //       actions[type] = (payload) =>
+    //         dispatchAction(type, store, action(payload));
+    //     }
+    //   }
+    // }
     if (store.actions) {
+      for (const [key, value] of Object.entries(store.actions)) {
+        actions[type] = (payload) =>
+          dispatchAction(type, store, action(payload));
+      }
+    }
+    if (store.asyncActions) {
       for (const [key, value] of Object.entries(store.actions)) {
         const type = `${store.name}_${key}`;
         const action = value(state[store.name]);
-        // const invoke = action();
-        // if (invoke.constructor.name === "AsyncFunction") {
-        const split = key.split("_");
-        if (split[0] === "async") {
-          actions[type] = async (data) => {
-            addPending(type);
-            try {
-              const response = await action(data);
-              const payload = await response();
-              dispatchAction(type, store, payload);
-            } catch (err) {
-              addError(type, err);
-            }
-          };
-        } else {
-          actions[type] = (payload) =>
-            dispatchAction(type, store, action(payload));
-        }
+        actions[type] = async (data) => {
+          addPending(type);
+          try {
+            const response = await action(data);
+            const payload = await response();
+            dispatchAction(type, store, payload);
+          } catch (err) {
+            addError(type, err);
+          }
+        };
       }
     }
   });
