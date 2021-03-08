@@ -32,7 +32,7 @@ const TodosStore = {
 <br/>
 <h4>2. Wrap your root component (src/index.js) with SimpleProvider and pass it your stores as an array.</h4>
 <pre><code>
-import { SimpleProvider } from "simple-context-state";
+import { SimpleProvider } from "../../simple-context-state"";
 <br/>
 ReactDOM.render(
 &nbsp;&nbsp;&lt;SimpleProvider component={&lt;App /&gt;} stores={[TodosStore, AnotherStore]} /&gt;,
@@ -45,7 +45,7 @@ ReactDOM.render(
 <p>Stores may have actions with the same name and we access actions with storeName_actionName.</p>
 <p>The action errors_reset() is avalible globally and clears the errors store.</p>
 <pre><code>
-import { useSimpleState } from "simple-context-state";
+import { useSimpleState } from "../../simple-context-state"";
 <br/>
 const { todos, todos_add, todos_fetch } = useSimpleState();
 <br/>
