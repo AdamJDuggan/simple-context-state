@@ -11,7 +11,7 @@
 <h3>Guide</h3>
 <br/>
 <h4>1. Quickly create your own stores as basic objects</h4>
-<p>Stores are simple objects with a name (string), initialState (any data type) and actions (object of functions). Note the different syntax of synchronous actions (add) and asynchronous actions (fetch).</p>
+<p>Stores are simple objects with a name (string), initialState (any data type), actions (object of functions) and asyncActions (object of asynchronous functions).</p>
 <pre><code>
 const TodosStore = {
 &nbsp;&nbsp;name: "todos",
@@ -20,7 +20,9 @@ const TodosStore = {
 &nbsp;&nbsp;&nbsp;&nbsp;add: (state) =&gt; (payload) =&gt; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, payload];
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
-&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;},
+&nbsp;&nbsp;asyncActions: {
 &nbsp;&nbsp;&nbsp;&nbsp;fetch: (state) =&gt; (payload) =&gt; async () =&gt; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const responce = await fetch(`https://...`);
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, responce];
@@ -29,6 +31,7 @@ const TodosStore = {
 &nbsp;&nbsp;},
 };
 </code></pre>
+
 <br/>
 <h4>2. Wrap your root component (src/index.js) with SimpleProvider and pass it your stores as an array.</h4>
 <pre><code>
