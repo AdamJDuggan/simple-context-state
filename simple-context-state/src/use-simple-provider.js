@@ -79,8 +79,10 @@ export const SimpleProvider = ({ ...root }) => {
       for (const [key, value] of Object.entries(store.actions)) {
         const type = `${store.name}_${key}`;
         const action = value(state[store.name]);
-        const invoke = action();
-        if (invoke.constructor.name === "AsyncFunction") {
+        // const invoke = action();
+        // if (invoke.constructor.name === "AsyncFunction") {
+        const split = key.split("_");
+        if (split[0] === "async") {
           actions[type] = async (data) => {
             addPending(type);
             try {
