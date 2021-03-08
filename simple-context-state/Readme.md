@@ -21,12 +21,14 @@ const TodosStore = {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, payload];
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
 &nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;},
+&nbsp;&nbsp;asyncActions:{
 &nbsp;&nbsp;&nbsp;&nbsp;fetch: (state) =&gt; (payload) =&gt; async () =&gt; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const responce = await fetch(`https://...`);
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, responce];
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
 &nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;},
+&nbsp;&nbsp;}
 };
 </code></pre>
 <br/>
