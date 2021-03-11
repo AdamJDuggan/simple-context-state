@@ -7,14 +7,15 @@ import App from "./App";
 import "./index.css";
 
 // SimpleState Provider
-import { SimpleProvider } from "simple-context-state";
+// import { SimpleProvider } from "simple-context-state";
+import { SimpleProvider } from "../src/package";
 
 // Stores created by the user ...
 import { TodosStore } from "./stores/TodosStore";
 import { ConsolesStore } from "./stores/ConsolesStore";
 
 ReactDOM.render(
-  <SimpleProvider component={<App />} stores={[TodosStore, ConsolesStore]} />,
+  <SimpleProvider component={<App />} stores={[TodosStore]} />,
 
   document.getElementById("root")
 );

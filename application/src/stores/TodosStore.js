@@ -4,10 +4,19 @@ const TodosStore = {
   name: "todos",
   initialState: ["Buy milk", "Start running", "Phone a friend"],
   actions: {
-    add: (state) => (payload) => {
+    add: (state) => (payload) => async () => {
       const newState = [...state, payload];
       return newState;
     },
+    fetch: (state) => (payload) => async () => {
+      const responce = await axios
+        .get(`https://jsonplaceholder.typicode.com/todos/1`)
+        .then((res) => res.data.title);
+      const newState = [...state, responce];
+      return newState;
+    },
+  },
+  asyncActions: {
     fetch: (state) => (payload) => async () => {
       const responce = await axios
         .get(`https://jsonplaceholder.typicode.com/todos/1`)
