@@ -1,19 +1,23 @@
 # simple-context-state
 
-Description
 Set up global state for your react app in minutes with this easy-to-use api.
 
 Simple-context-state wraps Reacts Context API to provide quick setup and easy management of your application state. All asynchronous actions get wrapped with a pending and errors state so at at time you can see whether actions are loading, resolved or failed. A simple API which exposes 4 easy-to-use utilities. No redux, no reducers and minimal boilerplate.
 
 
-Install
+Install:
+
 npm i simple-context-state
 
-Detailed guide
+
+
+Detailed guide:
+
 https://adamjduggan.github.io/simple-context-state-package
 
 
-Guide
+
+Guide:
 
 1. Quickly create your own stores as basic objects
 Stores are simple objects with a name (string), initialState (any data type), actions (object of functions) and asyncActions (object of asynchronous functions).
