@@ -1,4 +1,4 @@
-# context-api-utility-
+# simple-context-state
 
 Description
 Set up global state for your react app in minutes with this easy-to-use api.
