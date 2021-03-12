@@ -1,6 +1,6 @@
 import React from "react";
-// import { useSimpleState } from "simple-context-state";
-import { useSimpleState } from "../../src/package";
+import { useSimpleState } from "simple-context-state";
+//import { useSimpleState } from "../../src/package";
 
 function Todos() {
   //Todos Store

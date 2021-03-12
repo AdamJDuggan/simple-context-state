@@ -8,13 +8,6 @@ const TodosStore = {
       const newState = [...state, payload];
       return newState;
     },
-    fetch: (state) => (payload) => async () => {
-      const responce = await axios
-        .get(`https://jsonplaceholder.typicode.com/todos/1`)
-        .then((res) => res.data.title);
-      const newState = [...state, responce];
-      return newState;
-    },
   },
   asyncActions: {
     fetch: (state) => (payload) => async () => {

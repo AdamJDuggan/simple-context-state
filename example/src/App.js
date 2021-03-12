@@ -1,8 +1,8 @@
 import React from "react";
-// import { useSimpleErrors } from "simple-context-state";
-// import { useSimplePending } from "simple-context-state";
-import { useSimpleErrors } from "../src/package";
-import { useSimplePending } from "../src/package";
+import { useSimpleErrors } from "simple-context-state";
+import { useSimplePending } from "simple-context-state";
+// import { useSimpleErrors } from "../src/package";
+// import { useSimplePending } from "../src/package";
 
 import Todos from "./components/Todos";
 import Consoles from "./components/Consoles";
