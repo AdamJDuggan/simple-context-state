@@ -21,26 +21,20 @@ const TodosStore = {
 &nbsp;&nbsp;&nbsp;&nbsp;add: (state) =&gt; (payload) =&gt; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, payload];
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
-<<<<<<< HEAD
 &nbsp;&nbsp;&nbsp;&nbsp;}
 &nbsp;&nbsp;},
 &nbsp;&nbsp;asyncActions: {
-=======
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;},
-&nbsp;&nbsp;asyncActions:{
->>>>>>> 5d3e76dce7c96cfa139297a1f18dbd0557d8fc93
 &nbsp;&nbsp;&nbsp;&nbsp;fetch: (state) =&gt; (payload) =&gt; async () =&gt; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const responce = await fetch(`https://...`);
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const newState = [...state, responce];
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return newState;
 &nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;}
+&nbsp;&nbsp;},
 };
 </code></pre>
 
 <br/>
-<h4>2. Wrap your root component (src/index.js) with SimpleProvider and pass your stores to it as an array.</h4>
+<h4>2. Wrap your root component (app.js) with SimpleProvider and pass your stores to it as an array.</h4>
 <pre><code>
 import { SimpleProvider } from "simple-context-state"";
 <br/>
@@ -53,7 +47,7 @@ ReactDOM.render(
 <h4>3. Import actions and state into your components with useSimpleState()</h4>
 <p>Here todos is the array state.todos. </p>
 <p>todos_add() and todos_fetch() are the "add" and "fetch" actions created in the TodosStore.</p> 
-<p>Stores may have actions with the same name so we access actions with storeName_actionName.</p>
+<p>Stores may have actions using the same name so we access actions with storeName_actionName.</p>
 <p>The action errors_reset() is avalible globally and clears the errors store.</p>
 <pre><code>
 import { useSimpleState } from "../../simple-context-state"";
@@ -71,14 +65,20 @@ return (
 </code></pre>
 <br/>
 <h4>4. Access the errors store and pending store with two simple hooks</h4>
-<p>asyncActions are automatially wrapped in a pending state and errors state so at anytime you can see which actions are loading, which have resolved and which have failed.</p>
-<p>Passing the name of a store with return all actions from that store. Passing the name of an action with check the store for that action </p>
-<p>useSimplePending() returns an array of action names. useSimpleErrors() returns an array of objects which each have a type and message.</p>
+<p>Actions are automatially wrapped in a pending state and errors state so at anytime you can see whether your asynchronous actions are loading, have resolved or have failed.</p>
+<p> The useSimpleErrors() hook and useSimplePending() hook both
+recieve an array of strings. Each string can be either the name
+of a store or the name of a specific action in a store. If you
+pass the name of a store the hook will return any/all actions in
+that store which are pending (usePendingHook) or have failed
+(useErrorsHook). If the string is the name of an action the
+hooks will check if that action is in the pending or errors
+store respectively. </p>
 <pre><code>
 // Will get all/any errors from the errors store
 const errors = useSimpleErrors();
 <br/>
-// This will get all actions from the products store and/or auth store which are pending
+// This will get any actions from the products store and/or auth store which are pending
 const pending = useSimplePending("auth", "products");
 <br/>
 // Checks the errors store for to see if either/both of these actions from the auth store have failed
