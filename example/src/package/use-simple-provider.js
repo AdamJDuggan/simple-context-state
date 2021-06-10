@@ -45,17 +45,26 @@ export const SimpleProvider = ({ ...root }) => {
   };
 
   const errors_clear = (...errors) => {
-    let newErrors = [];
-    if (!errors.length) {
-      const newState = {
-        ...state,
-        errors: newErrors,
-      };
-      dispatch({
-        type: `clearAllErrors`,
-        payload: newState,
-      });
-    }
+    errors.map((error) => console.log(error));
+    const newState = {
+      ...state,
+      errors: [],
+    };
+    dispatch({
+      type: `errors_clear`,
+      payload: newState,
+    });
+  };
+
+  const pending_clear = () => {
+    const newState = {
+      ...state,
+      pending: [],
+    };
+    dispatch({
+      type: `pending_clear`,
+      payload: newState,
+    });
   };
 
   const dispatchAction = (type, store, payload) => {
@@ -72,7 +81,7 @@ export const SimpleProvider = ({ ...root }) => {
     });
   };
 
-  const actions = { errors_clear };
+  const actions = { errors_clear, pending_clear };
 
   root.stores.map((store) => {
     if (store.actions) {
@@ -102,7 +111,6 @@ export const SimpleProvider = ({ ...root }) => {
     }
   });
 
-  //Create an array which will be an object of each store and its state
   const globalStore = {};
 
   for (const [key, value] of Object.entries(stores)) {

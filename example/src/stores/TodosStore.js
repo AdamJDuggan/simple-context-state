@@ -4,7 +4,7 @@ const TodosStore = {
   name: "todos",
   initialState: ["Buy milk", "Start running", "Phone a friend"],
   actions: {
-    add: (state) => (payload) => async () => {
+    add: (state) => (payload) => {
       const newState = [...state, payload];
       return newState;
     },
@@ -17,9 +17,9 @@ const TodosStore = {
       const newState = [...state, responce];
       return newState;
     },
-    fetch_fail: (state) => (payload) => async () => {
+    fail: (state) => (payload) => async () => {
       const responce = await axios
-        .get(`https://djsonplaceholder.typicode.com/todos/1`, { timeout: 2000 })
+        .get(`https://💀jsonplaceholder.typicode.com/todos/2`)
         .then((res) => res.data.title);
       const newState = [...state, responce];
       return newState;

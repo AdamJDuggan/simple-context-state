@@ -1,6 +1,6 @@
 const ConsolesStore = {
   name: "consoles",
-  initialState: ["N64", "SNES", "PS1"],
+  initialState: ["Master System", "Mega Drive", "Saturn"],
   actions: {
     add: (state) => (payload) => {
       const newState = [...state, payload];
@@ -8,4 +8,4 @@ const ConsolesStore = {
     },
   },
 };
-export { ConsolesStore };
+export default ConsolesStore;

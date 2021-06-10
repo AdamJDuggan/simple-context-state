@@ -9,7 +9,6 @@ const useSimpleErrors = (...actions) => {
   } else {
     actions.map((action) => {
       if (!action.split("_")[1]) {
-        console.log(action.split("_")[0]);
         errors.find((error) => {
           if (
             error.type.split("_")[0] === action.split("_")[0] &&
