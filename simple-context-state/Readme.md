@@ -48,9 +48,8 @@
           </tr>
         </tbody>
       </table>
-  
-<h3>Guide</h3>
 <br/>
+<h3>Guide</h3>
 <h4>1. Create your own stores as basic objects with a name (string), initialState (any data type), actions (object of functions) and asyncActions (object of asynchronous functions).</h4>
 <pre><code>
 const TodosStore = {

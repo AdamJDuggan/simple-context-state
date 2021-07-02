@@ -1,6 +1,6 @@
 {
   "name": "simple-context-state",
-  "version": "1.9.57",
+  "version": "1.9.59",
   "description": "",
   "main": "./build/index.js",
   "scripts": {
