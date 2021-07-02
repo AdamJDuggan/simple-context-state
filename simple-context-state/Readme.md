@@ -16,7 +16,7 @@
         <tbody>
           <tr>
             <td>
-              {"<SimpleProvider />"}
+              &lt;SimpleProvider /&gt;
             </td>
             <td>
               Provides state and actions to child components.
@@ -78,13 +78,17 @@ Wrap a React component with SimpleProvider and pass your stores to it as an arra
 <pre><code>
 import { SimpleProvider } from "simple-context-state"";
 <br/>
+<br/>
 // Example with one provider for whole app (index.js file)
+<br/>
 ReactDOM.render(
 &nbsp;&nbsp;&lt;SimpleProvider component={&lt;App /&gt;} stores={[TodosStore, AnotherStore]} /&gt;,
 &nbsp;&nbsp;document.getElementById("root")
 );
 <br/>
+<br/>
 // Example of using multiple providers in larger applications (App.js file)
+<br/>
 function App(){
 &nbsp;return (
 &nbsp;&nbsp;&lt;SimpleProvider component={&lt;Todos /&gt;} stores={[TodosStore]} /&gt;
@@ -110,18 +114,20 @@ const { todos, todos_add, todos_fetch } = useSimpleState();
 <br/>
 return (
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;  // todos is the state from the TodoStore  
+&nbsp;&nbsp;&nbsp;&nbsp;// todos is the state from the TodoStore  
 &nbsp;&nbsp;&nbsp;&nbsp;{todos &amp;&amp; todos.map((t) =&gt; &lt;p&gt;{t}&lt;/p&gt;)}  
-<br/>// Actions are accessed by storeName_actionName
-&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;// Actions are accessed by storeName_actionName
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; todos_add("Buy a bike")}&gt;Add async&lt;/button&gt;
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;// Same for asyncActions
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; todos_fetch()}&gt;Get todo from API&lt;/button&gt; 
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;// clear_errors is an in-built action which clears the errors store
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; errors_clear()}&gt;Clear Errors&lt;/button&gt;  
-);
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; errors_clear()}&gt;Clear Errors&lt;/button&gt; 
+<br/> 
+&nbsp;);
+<br/>
 }
 
 </code></pre>
