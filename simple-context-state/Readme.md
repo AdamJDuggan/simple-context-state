@@ -9,7 +9,7 @@
 <pre><code>npm i simple-context-state</code></pre>
 <br/>
 <h3>Detailed guide</h3>
-<p>https://adamjduggan.github.io/demo-simple-context-state-package</p>
+<p>https://adamjduggan.github.io/demo-simple-context-state</p>
 <br/>
 <h3>API</h3>
     <table>
