@@ -77,25 +77,19 @@ Wrap a React component with SimpleProvider and pass your stores to it as an arra
 <pre><code>
 import { SimpleProvider } from "simple-context-state"";
 <br/>
-<br/>
 // Example with one provider for whole app (index.js file)
-<br/>
 ReactDOM.render(
 &nbsp;&nbsp;&lt;SimpleProvider component={&lt;App /&gt;} stores={[TodosStore, AnotherStore]} /&gt;,
 &nbsp;&nbsp;document.getElementById("root")
 );
 <br/>
-<br/>
-// Example of using multiple providers in larger applications (App.js file)
-<br/>
+// Example of using multiple providers in larger applications (App.js file or another component)
 function App(){
 &nbsp;return (
 &nbsp;&nbsp;&lt;SimpleProvider component={&lt;Todos /&gt;} stores={[TodosStore]} /&gt;
 &nbsp;&nbsp;&lt;SimpleProvider component={&lt;Food /&gt;} stores={[FruitStore, VegtableStore]} /&gt;
-)
-
+&nbsp;)
 }
-
 </code></pre>
 <br/>
 <h4>3. Access state and actions from your stores in components.</h4>
