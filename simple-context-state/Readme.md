@@ -1,4 +1,4 @@
-<h1>Global state utility for react</h1>
+<h1>Simple-Context state</h1>
 <h3>Description</h3>
 <p>Enables quick setup and easy management of state in react applications.</p>
 <p>Provides an in-build Errors store and Pending store (stores being blocks of state) which interact with the stores you create.</p>
