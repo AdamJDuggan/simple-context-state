@@ -43,7 +43,7 @@
               useSimplePending()
             </td>
             <td>
-              Access the in-built errors stores.
+              Access the in-built pending stores.
             </td>
           </tr>
         </tbody>
@@ -103,7 +103,7 @@ import { useSimpleState } from "../../simple-context-state"";
 <br/>
 function TodosComponent(){
 <br/>
-const { todos, todos_add, todos_fetch } = useSimpleState();
+const { todos, todos_add, todos_fetch, clear_errors } = useSimpleState();
 <br/>
 return (
 <br/>
@@ -125,6 +125,7 @@ return (
 
 </code></pre>
 <br/>
+
 <h4>4. Access the errors store and pending store with two simple hooks</h4>
 <p>Each SimpleProvider in your app exposes an errors store and pending store.</p>
 <p>asyncActions are automatially wrapped in a pending state and errors state so at anytime you can see whether your asynchronous actions are loading, have resolved or have failed.</p>
